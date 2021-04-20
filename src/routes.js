@@ -8,13 +8,14 @@ const routes = new Router();
 
 routes.post('/sessions', SessionController.store);
 
+routes.post('/users', UserController.store);
+
+routes.use(authMiddleware);
+
 routes.post('/contacts', ContactsController.store);
 routes.put('/contacts', ContactsController.update);
 routes.get('/contacts', ContactsController.index);
 routes.get('/contacts/:id', ContactsController.show);
-
-routes.post('/users', UserController.store);
-routes.use(authMiddleware);
 
 routes.put('/users', UserController.update);
 routes.put('/users-status', UserController.updateStatus);

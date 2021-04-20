@@ -129,6 +129,30 @@ class ContactsController {
       })
     );
   }
+
+  async show(req, res) {
+    const contact = await Contacts.findOne({
+      where: { id: req.params.id },
+    });
+
+    if (!contact) {
+      return res.status(401).json({
+        error: 'Ocorreu um erro ao encontrar o contato. Tente novamente!',
+      });
+    }
+
+    const { name, last_name, fone, birth_date, address, email } = contact;
+
+    return res.json({
+      id: req.params.id,
+      name,
+      last_name,
+      fone,
+      birth_date,
+      address,
+      email,
+    });
+  }
 }
 
 export default new ContactsController();
